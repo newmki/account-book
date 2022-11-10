@@ -3,7 +3,7 @@
  */
 const express = require('express');
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
 
 /**
  * Import modules
@@ -23,7 +23,14 @@ const port = 3000;
 /**
  * Middlewares
  */
+// cors
 app.use(cors());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 /**
  * Routes
