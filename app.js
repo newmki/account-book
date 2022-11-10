@@ -1,7 +1,13 @@
 /**
- * Import modulest
+ * Import packages
  */
 const express = require('express');
+const cors = require('cors');
+
+
+/**
+ * Import modules
+ */
 const health = require('./health');
 
 /**
@@ -17,17 +23,16 @@ const port = 3000;
 /**
  * Middlewares
  */
-app.get('/', function(req, res) {
-    res.send('hello world');
-})
+app.use(cors());
 
 /**
  * Routes
  */
+app.use('/', health);
 app.use('/health', health);
 
 /**
- * start server
+ * Start server
  */
 app.listen(port, function() {
     console.log(`server port: ${port}`);
