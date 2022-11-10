@@ -35,8 +35,13 @@ app.use(bodyParser.json())
 /**
  * Routes
  */
-app.use('/', health);
-app.use('/health', health);
+// For Health Check
+app.use('/api/health', health);
+
+// Default route
+app.get("*", (req, res) => {
+  res.send("PAGE NOT FOUND");
+});
 
 /**
  * Start server
