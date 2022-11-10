@@ -4,21 +4,16 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const routes = require('./routes/v1');
 
 /**
  * Import modules
  */
-const health = require('./health');
 
 /**
  * Objects
  */
 const app = express();
-
-/**
- * Constants
- */
-const port = 3000;
 
 /**
  * Middlewares
@@ -35,17 +30,11 @@ app.use(bodyParser.json())
 /**
  * Routes
  */
-// For Health Check
-app.use('/api/health', health);
+app.use('/api', routes);
 
 // Default route
 app.get("*", (req, res) => {
   res.send("PAGE NOT FOUND");
 });
 
-/**
- * Start server
- */
-app.listen(port, function() {
-    console.log(`server port: ${port}`);
-})
+module.exports = app;
