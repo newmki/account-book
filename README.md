@@ -15,9 +15,9 @@ export interface Tag {
 export interface AccountHistory {
   date: string;
   amount: number;
-  title: string;
-  type?: '입금' | '출금' | '송금';
-  memo?: string;
+  type: '입금' | '출금';
+  memo: string;
+  tags: Tag[];
 }
 
 export interface Bankbook {
@@ -33,3 +33,9 @@ export interface Bankbook {
 ```
 
 # API
+
+POST - /api/accounts
+
+GET  - /api/accounts
+
+GET  - /api/accounts/:id
