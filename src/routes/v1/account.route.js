@@ -6,7 +6,7 @@ const express = require('express');
 /**
  * Import modules
  */
-const healthController = require('../../controllers/health.controller');
+const accountController = require('../../controllers/account.controller');
 
 /**
  * Objects
@@ -18,6 +18,7 @@ const router = express.Router();
  */
 router
   .route('/')
-  .get(healthController.getHealthCheck);
+  .post(accountController.createAccount)
+  .get(accountController.getAccounts);
 
 module.exports = router;

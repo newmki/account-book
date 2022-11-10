@@ -9,7 +9,6 @@ const config = require('./config/config');
  */
 const port = config.port
 
-
 /**
  * Start server
  */

@@ -4,11 +4,11 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const routes = require('./routes/v1');
 
 /**
  * Import modules
  */
+const routes = require('./routes/v1');
 
 /**
  * Objects
@@ -18,7 +18,6 @@ const app = express();
 /**
  * Middlewares
  */
-// cors
 app.use(cors());
 
 // parse application/x-www-form-urlencoded
