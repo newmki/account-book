@@ -21,4 +21,8 @@ router
   .post(accountController.createAccount)
   .get(accountController.getAccounts);
 
+router
+  .route('/:accountId')
+  .get(accountController.getAccount);
+
 module.exports = router;
