@@ -1,12 +1,12 @@
 /**
  * Import packages
  */
-const express = require('express');
+const express = require("express");
 
 /**
  * Import modules
  */
-const accountController = require('../../controllers/account.controller');
+const accountController = require("../../controllers/account.controller");
 
 /**
  * Objects
@@ -17,12 +17,21 @@ const router = express.Router();
  * Routes
  */
 router
-  .route('/')
+  .route("/")
   .post(accountController.createAccount)
-  .get(accountController.getAccounts);
+  .get(accountController.getAccounts)
+  .delete(accountController.deleteAccounts);
 
 router
-  .route('/:accountId')
-  .get(accountController.getAccount);
+  .route("/:accountId")
+  .get(accountController.getAccount)
+  .post(accountController.createAccountLog)
+  .patch(accountController.updateAccount)
+  .delete(accountController.deleteAccount);
+
+router
+  .route("/:accountId/history")
+  .get(accountController.getAccountHistory)
+  .delete(accountController.deleteAccountHistory);
 
 module.exports = router;
