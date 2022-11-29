@@ -25,12 +25,12 @@ router
 router
   .route("/:accountId")
   .get(accountController.getAccount)
-  .post(accountController.createAccountLog)
   .patch(accountController.updateAccount)
   .delete(accountController.deleteAccount);
 
 router
   .route("/:accountId/history")
+  .post(accountController.createAccountLog)
   .get(accountController.getAccountHistory)
   .delete(accountController.deleteAccountHistory);
 
