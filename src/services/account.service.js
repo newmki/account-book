@@ -21,8 +21,6 @@ const getAccountIndexById = (id) => {
 
 const getAccountOrHistoryByTag = (Array, tag) => {
   const filtered = Array.filter((value) => value.tags.includes(tag));
-  console.log(Array);
-  console.log(filtered);
 
   return filtered;
 };
@@ -100,28 +98,6 @@ const deleteAccounts = () => {
   return returnObject(`Deleted all accounts`);
 };
 
-/**
- * Create account history
- * @param {Number} id
- * @returns {Object}
- */
-const createAccountLog = (id, body) => {
-  const index = getAccountIndexById(id);
-  if (index === -1) {
-    return returnObject(`Couldn't find account`);
-  }
-
-  let history = Account[index].accountHistory;
-  if (history === undefined) {
-    return returnObject(`Couldn't find account history`);
-  }
-
-  Account[index].accountHistory.push(body);
-  history = Account[index].accountHistory;
-
-  return returnObject(`It's history of account ${index}`, history);
-};
-
 const getAccount = (id) => {
   /**
    * Get account by id
@@ -180,6 +156,39 @@ const deleteAccount = (id) => {
 };
 
 /**
+ * Create account history
+ * @param {Number} id
+ * @returns {Object}
+ */
+const createAccountLog = (id, body) => {
+  const index = getAccountIndexById(id);
+  if (index === -1) {
+    return returnObject(`Couldn't find account`);
+  }
+  const selectedAccount = Account[index];
+
+  let history = selectedAccount.accountHistory;
+  if (history === undefined) {
+    return returnObject(`Couldn't find account history`);
+  }
+
+  // Calculate account balance
+  if (body.type !== "출금" && body.type !== "입금") {
+    return returnObject(`Wrong type. Put 입금 or 출금`);
+  } else if (body.type === "출금") {
+    selectedAccount.balance -= body.amount;
+  } else if (body.type === "입금") {
+    selectedAccount.balance += body.amount;
+  }
+
+  // Push History
+  selectedAccount.accountHistory.push(body);
+  history = selectedAccount.accountHistory;
+
+  return returnObject(`It's history of account ${index}`, history);
+};
+
+/**
  * Get account history
  * @param {Number} id
  * @returns {Object}
@@ -229,10 +238,10 @@ module.exports = {
   createAccount,
   getAccounts,
   deleteAccounts,
-  createAccountLog,
   getAccount,
   updateAccount,
   deleteAccount,
+  createAccountLog,
   getAccountHistory,
   deleteAccountHistory,
 };

@@ -21,7 +21,6 @@ export interface Bankbook {
   tags: Tag[];
   accountName: string;
   accountNumber: string;
-  amount: number;
   accountHistory: AccountHistory[];
   description?: string;
 }
